@@ -14,7 +14,9 @@ $id = mysqli_fetch_row($query);
 $id = (int)$id[0];
 $cant = mysqli_num_rows($query);
 if ($cant>0) {
+    $delete = "DELETE FROM logs WHERE id_usuario='$id'";
     $insert = "INSERT INTO logs VALUES (null,'$token','$id')";
+    $delete = mysqli_query($conexion, $delete);
     $resultado = mysqli_query($conexion, $insert);
     $retorno['exito'] = true;
     $retorno['token'] = $token;

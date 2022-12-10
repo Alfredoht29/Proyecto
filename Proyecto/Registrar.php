@@ -1,7 +1,7 @@
 <?php
 include 'BdConnection.php';
 $retorno = array(
-    'exito' => false,
+    'exito' => false
 );
 $post = empty($_POST) ? json_decode(file_get_contents('php://input'), true) : $_POST;
 $nickname=$post['nickname'];

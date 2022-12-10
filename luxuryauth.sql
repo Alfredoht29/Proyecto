@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 02:33:30
+-- Tiempo de generación: 10-12-2022 a las 20:03:26
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -38,8 +38,7 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `token`, `id_usuario`) VALUES
-(1, '1463f953c8e014575990cf004b5746c1', 2),
-(2, '729c4f5c65ff9b86c13c970706138b32', 2);
+(27, '1e2b918fb699fdc30ed2fa274e2b2e52', 2);
 
 -- --------------------------------------------------------
 
@@ -113,7 +112,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
