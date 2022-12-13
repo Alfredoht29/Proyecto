@@ -17,6 +17,7 @@ class Feed : AppCompatActivity() {
     private val url_sesion="http://192.168.0.17/Proyecto/Feed.php"
     private var usuario=""
     private var rol=""
+    private var id=0
     private lateinit var etUsuario:TextView
     private lateinit var etRol:TextView
 
@@ -53,6 +54,7 @@ class Feed : AppCompatActivity() {
                 if(response.getBoolean("exito")){
                     usuario=response.getString("usuario")
                     rolint=response.getInt("rol")
+                    id=response.getInt("id")
                     if(rolint==1){
                         rol="Usuario"
                     }
@@ -72,6 +74,7 @@ class Feed : AppCompatActivity() {
     }
     private fun agregar(){
         val intent: Intent = Intent(this,Agregar::class.java)
+        intent.putExtra("id",id)
         startActivity(intent)
     }
 }

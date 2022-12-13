@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 20:03:26
+-- Tiempo de generación: 12-12-2022 a las 11:59:40
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -38,7 +38,7 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `token`, `id_usuario`) VALUES
-(27, '1e2b918fb699fdc30ed2fa274e2b2e52', 2);
+(39, '07672ca549502fff1cab5057761e78af', 2);
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,9 @@ CREATE TABLE `metodo_de_pago` (
 --
 
 CREATE TABLE `tickets` (
-  `id_ticket` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_auditor` int(11) DEFAULT NULL,
   `modelo` varchar(70) NOT NULL,
   `marca` varchar(50) NOT NULL,
   `imagen` varchar(95) NOT NULL,
@@ -99,6 +101,12 @@ ALTER TABLE `logs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -112,7 +120,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
+--
+-- AUTO_INCREMENT de la tabla `tickets`
+--
+ALTER TABLE `tickets`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
