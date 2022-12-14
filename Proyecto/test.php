@@ -1,3 +1,4 @@
 <?php
-echo "funciona";
+$retorno = "funciona";
+echo json_encode($retorno);
 ?>

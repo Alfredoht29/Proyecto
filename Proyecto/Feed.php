@@ -3,6 +3,7 @@ include 'BdConnection.php';
 $retorno = array(
     'exito' => false,
     'usuario' => "",
+    'id'=>0,
     'rol' => 0
 );
 $post = empty($_POST) ? json_decode(file_get_contents('php://input'), true) : $_POST;
@@ -12,6 +13,7 @@ $resultado = mysqli_query($conexion, $query);
 $resultadoarr= mysqli_fetch_row($resultado);
 if ($resultado) {
     $retorno['exito'] = true;
+    $retorno['id'] = $resultadoarr[1];
     $retorno['usuario']=$resultadoarr[2];
     $retorno['rol'] = $resultadoarr[3];
 }

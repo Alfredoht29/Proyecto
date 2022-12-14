@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
     private fun getToken(post: JSONObject){
         val queue = Volley.newRequestQueue(this)
         var token=""
+        var rol:Int
         val request : JsonObjectRequest = JsonObjectRequest(
             Request.Method.POST,
             url_token,
@@ -53,9 +54,17 @@ class MainActivity : AppCompatActivity() {
                 if(response.getBoolean("exito")){
                     Toast.makeText(applicationContext,"Login Exitoso", Toast.LENGTH_SHORT).show()
                     token=response.getString("token")
-                    val intent: Intent = Intent(this,Feed::class.java)
-                    intent.putExtra("token",token)
-                    startActivity(intent)
+                    rol=response.getInt("rol")
+                    if(rol==1){
+                        val intent: Intent = Intent(this,FeedUser::class.java)
+                        intent.putExtra("token",token)
+                        startActivity(intent)
+                    }
+                    if(rol==2){
+                        val intent: Intent = Intent(this,Feed::class.java)
+                        intent.putExtra("token",token)
+                        startActivity(intent)
+                    }
                 }
             },
             {

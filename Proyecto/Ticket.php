@@ -5,7 +5,7 @@ $id_usuario = $post['usuario'];
 $modelo = $post['modelo'];
 $marca = $post['marca'];
 $imagen = $post['imagen'];
-$insert="INSERT INTO tickets VALUES (null,'$id_usuario','$modelo','$marca','$imagen',NOW())";
+$insert="INSERT INTO tickets VALUES (null,'$id_usuario',null,'$modelo','$marca','$imagen',NOW())";
 $resultado=mysqli_query($conexion,$insert);
 if($resultado){
     $retorno['exito']   = true;
@@ -13,4 +13,6 @@ if($resultado){
 }else{
     $retorno['mensaje'] = 'Error en BD';
 }
+header('Content-type: application/json');
+echo json_encode($retorno);
 ?>

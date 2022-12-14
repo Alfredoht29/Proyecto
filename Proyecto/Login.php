@@ -8,10 +8,11 @@ $post = empty($_POST) ? json_decode(file_get_contents('php://input'), true) : $_
 $token = bin2hex(random_bytes(16));
 $usuario = $post['usuario'];
 $password = $post['password'];
-$login = "SELECT id FROM usuarios WHERE nickname ='$usuario' AND password ='$password'";
+$login = "SELECT id,rol FROM usuarios WHERE nickname ='$usuario' AND password ='$password'";
 $query = mysqli_query($conexion, $login);
-$id = mysqli_fetch_row($query);
-$id = (int)$id[0];
+$arr = mysqli_fetch_array($query);
+$id = (int)$arr[0];
+$rol = (int) $arr[1];
 $cant = mysqli_num_rows($query);
 if ($cant>0) {
     $delete = "DELETE FROM logs WHERE id_usuario='$id'";
@@ -20,6 +21,7 @@ if ($cant>0) {
     $resultado = mysqli_query($conexion, $insert);
     $retorno['exito'] = true;
     $retorno['token'] = $token;
+    $retorno['rol'] = $rol;
 }
 header('Content-type: application/json');
 echo json_encode($retorno);

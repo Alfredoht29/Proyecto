@@ -7,30 +7,37 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.json.JSONArray
 import org.json.JSONObject
 
 class Feed : AppCompatActivity() {
     private val url_sesion="http://192.168.0.17/Proyecto/Feed.php"
+    private val url_listar="http://192.168.0.17/Proyecto/UrlListar.php"
     private var usuario=""
     private var rol=""
     private var id=0
+    private lateinit var adapter: TicketAdapter
     private lateinit var etUsuario:TextView
     private lateinit var etRol:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
-        etUsuario=findViewById(R.id.etUsuarioFeed)
-        etRol=findViewById(R.id.etRol)
-        val fbAgregar:FloatingActionButton=findViewById(R.id.fbAgregar)
+        etUsuario = findViewById(R.id.etUsuarioFeed)
+        etRol = findViewById(R.id.etRol)
+        val rvFeed: RecyclerView = findViewById(R.id.rvFeed)
+        adapter=TicketAdapter()
+        rvFeed.adapter = adapter
+        rvFeed.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
         configFeed()
-        fbAgregar.setOnClickListener{
-            agregar()
-        }
+
     }
     private fun configFeed(){
         val intent=intent
@@ -42,6 +49,7 @@ class Feed : AppCompatActivity() {
         if (token != null) {
             Log.e("FeedActicity",token)
         }
+        leerLista()
     }
     private fun getUsuario(post:JSONObject){
         var rolint=0
@@ -72,9 +80,43 @@ class Feed : AppCompatActivity() {
         )
         queue.add(request)
     }
-    private fun agregar(){
-        val intent: Intent = Intent(this,Agregar::class.java)
-        intent.putExtra("id",id)
-        startActivity(intent)
+
+    private fun leerLista(){
+        val queue : RequestQueue = Volley.newRequestQueue(this)
+
+        val request : JsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET,
+            url_listar,
+            null,
+            {
+                    response->
+                if(response.getBoolean("exito")){
+                    llenarLista( response.getJSONArray("lista") )
+                }
+            },
+            {
+                    errorListener->
+                Toast.makeText(applicationContext,"Error de conexion", Toast.LENGTH_SHORT).show()
+            }
+        )
+
+        queue.add(request)
+    }
+    private fun llenarLista(lista: JSONArray) {
+        adapter.limpiar()
+
+        for (i in 0..lista.length() - 1) {
+            val v = lista[i] as JSONObject
+
+            var ticket = Ticket()
+
+            ticket.id = v.getInt("id")
+            ticket.id_Usuario = v.getInt("id_usuario")
+            ticket.id_auditor = v.getInt("id_auditor")
+            ticket.modelo = v.getString("modelo")
+            ticket.marca = v.getString("marca")
+            ticket.imagen = v.getString("imagen")
+            adapter.guardar(ticket)
+        }
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-12-2022 a las 11:59:40
+-- Tiempo de generación: 14-12-2022 a las 06:07:30
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 7.4.33
 
@@ -38,7 +38,9 @@ CREATE TABLE `logs` (
 --
 
 INSERT INTO `logs` (`id`, `token`, `id_usuario`) VALUES
-(39, '07672ca549502fff1cab5057761e78af', 2);
+(66, 'eb929f745d618716189696e702e13658', 0),
+(71, '03b91ec1d0244b4390d511b0833aac5a', 1),
+(72, '1b91fb60750d86f6d1c87e51257ab2e2', 2);
 
 -- --------------------------------------------------------
 
@@ -64,9 +66,18 @@ CREATE TABLE `tickets` (
   `id_auditor` int(11) DEFAULT NULL,
   `modelo` varchar(70) NOT NULL,
   `marca` varchar(50) NOT NULL,
-  `imagen` varchar(95) NOT NULL,
+  `imagen` varchar(150) NOT NULL,
   `fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `id_usuario`, `id_auditor`, `modelo`, `marca`, `imagen`, `fecha`) VALUES
+(4, 2, NULL, 'erwrwe', 'wrwerew', 'https://firebasestorage.googleapis.com/v0/b/proyecto-integrador-26783.appspot.com/o/images%2Fimg_2022-12-12_11%3A31%3A54?alt=media&token=1087aa2a-5fe8', '2022-12-12'),
+(5, 2, NULL, 'ada', 'dsads', 'https://firebasestorage.googleapis.com/v0/b/proyecto-integrador-26783.appspot.com/o/images%2Fimg_2022-12-12_11%3A35%3A51?alt=media&token=45dedb05-6c98', '2022-12-12'),
+(6, 2, NULL, 'sdsadas', 'dasdasd', '', '2022-12-13');
 
 -- --------------------------------------------------------
 
@@ -120,13 +131,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
